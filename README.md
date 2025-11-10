@@ -82,7 +82,7 @@ Your peer supporters will be your guides throughout the cohort! Learn more about
 - [Todd Deshane](https://www.notion.so/Todd-Deshane-c18ecdb96e2c4afaafaa7aad522fa1a3?pvs=21), 1:1 Support Lead, available at 9 PM ET on Sundays
 - [JJ Ovalle](https://www.notion.so/Juan-Ovalle-4508b519a332484d8736ab243aa9fd00), available TBD
 - [Julie Berlin](https://www.notion.so/Julie-Berlin-264cd547af3d805884c0d9710095cac1?pvs=21), available 8:00-9:00 PM ET on Wednesdays *Office Hours Only*
-- [Nooshin Hashemi](https://www.notion.so/Nooshin-Hashemi-2a0cd547af3d800daee0da5645f9a6c4), available 6:30-7:30 PM ET on Tuesdays *Office Hours Only*
+- [Nooshin Hashemi](https://www.notion.so/Nooshin-Hashemi-2a0cd547af3d800daee0da5645e9a6c4), available 6:30-7:30 PM ET on Tuesdays *Office Hours Only*
 
 
 🎉 You'll also notice office hours from instructors, peer supporters, and more!
