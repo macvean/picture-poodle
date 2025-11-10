@@ -23,7 +23,7 @@ Class is held from 12:00 to 1:30 PM on Mondays, and will open promptly at 12:00:
 
 # 🧑‍🎓 Course Materials
 
-Our [syllabus and detailed schedule](https://www.notion.so/The-AI-Engineering-Bootcamp-Cohort-8-Course-Schedule-Curriculum-22acd547af3d80198453e0be6139ec0d?pvs=21) will guide us through the course.
+Our [syllabus and detailed schedule](https://bit.ly/aieo1-curr) will guide us through the course.
 
 For each session, you can find everything you need directly in the GitHub README.md for that session. This includes:
 
