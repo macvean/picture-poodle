@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Upload, Download, Sparkles } from 'lucide-react';
+import { Upload, Download, Sparkles, PartyPopper, Heart } from 'lucide-react';
 
 type FilterType = 'none' | 'mustache' | 'neon' | 'pixel' | 'flare';
 
@@ -214,35 +214,53 @@ export default function PostcardPoodle() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-playful-gradient-alt py-8 px-4 relative overflow-hidden">
+      {/* Decorative floating elements */}
+      <div className="absolute top-10 left-10 text-6xl opacity-20 animate-float">🎈</div>
+      <div className="absolute top-20 right-20 text-5xl opacity-20 animate-bounce-gentle" style={{ animationDelay: '0.5s' }}>🎉</div>
+      <div className="absolute bottom-20 left-20 text-4xl opacity-20 animate-float" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute bottom-10 right-10 text-5xl opacity-20 animate-bounce-gentle" style={{ animationDelay: '1.5s' }}>🎨</div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-primary mb-2 text-balance">
-            Postcard Poodle 🐩
-          </h1>
-          <p className="text-lg text-muted-foreground text-pretty">
-            Transform your photos into whimsical postcards with silly filters!
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-6xl animate-bounce-gentle inline-block">🐩</span>
+            <h1 className="text-6xl md:text-7xl font-extrabold animate-rainbow mb-0 text-balance">
+              Postcard Poodle
+            </h1>
+            <span className="text-6xl animate-bounce-gentle inline-block" style={{ animationDelay: '0.3s' }}>🎴</span>
+          </div>
+          <p className="text-xl md:text-2xl text-foreground/90 font-semibold text-pretty mb-2">
+            Transform your photos into whimsical postcards with silly filters! 🎨✨
           </p>
+          <div className="flex items-center justify-center gap-2 text-2xl mt-3">
+            <span className="animate-float">🎭</span>
+            <span className="animate-float" style={{ animationDelay: '0.2s' }}>🌈</span>
+            <span className="animate-float" style={{ animationDelay: '0.4s' }}>🎪</span>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Left Column - Upload & Filters */}
           <div className="space-y-6">
             {/* Upload Area */}
-            <Card className="p-6">
-              <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-                <Upload className="w-6 h-6 text-primary" />
-                Upload Photo
+            <Card className="p-6 bg-white/90 backdrop-blur-sm border-4 border-pink-300 rounded-3xl shadow-playful hover-lift">
+              <h2 className="text-3xl font-extrabold text-foreground mb-5 flex items-center gap-3">
+                <Upload className="w-8 h-8 text-pink-500 animate-bounce-gentle" />
+                <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+                  Upload Photo
+                </span>
+                <span className="text-3xl">📸</span>
               </h2>
               <div
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
-                className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+                className={`border-4 border-dashed rounded-2xl p-10 text-center transition-all duration-300 cursor-pointer ${
                   isDragging
-                    ? 'border-primary bg-primary/5'
-                    : 'border-border hover:border-primary/50'
+                    ? 'border-pink-500 bg-gradient-to-br from-pink-100 to-purple-100 scale-105 shadow-playful-lg'
+                    : 'border-pink-300 bg-gradient-to-br from-pink-50 to-purple-50 hover:border-pink-400 hover:bg-gradient-to-br hover:from-pink-100 hover:to-purple-100 hover:scale-[1.02]'
                 }`}
                 onClick={() => fileInputRef.current?.click()}
               >
@@ -256,13 +274,13 @@ export default function PostcardPoodle() {
                     if (file) handleFileSelect(file);
                   }}
                 />
-                <div className="space-y-2">
-                  <div className="text-4xl">📸</div>
-                  <p className="text-foreground font-medium">
-                    Click or drag an image here
+                <div className="space-y-3">
+                  <div className="text-6xl animate-bounce-gentle">📸</div>
+                  <p className="text-foreground font-bold text-lg">
+                    Click or drag an image here! 🎯
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    JPG or PNG files
+                  <p className="text-sm text-muted-foreground font-medium">
+                    JPG or PNG files accepted ✨
                   </p>
                 </div>
               </div>
@@ -270,21 +288,32 @@ export default function PostcardPoodle() {
 
             {/* Filter Selection */}
             {image && (
-              <Card className="p-6">
-                <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-primary" />
-                  Choose Your Vibe
+              <Card className="p-6 bg-white/90 backdrop-blur-sm border-4 border-purple-300 rounded-3xl shadow-playful hover-lift">
+                <h2 className="text-3xl font-extrabold text-foreground mb-5 flex items-center gap-3">
+                  <Sparkles className="w-8 h-8 text-purple-500 animate-pulse-glow" />
+                  <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+                    Choose Your Vibe
+                  </span>
+                  <span className="text-3xl animate-spin-slow">✨</span>
                 </h2>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   {filters.map((filter) => (
                     <Button
                       key={filter.id}
                       variant={selectedFilter === filter.id ? 'default' : 'outline'}
-                      className="h-auto py-4 px-4 flex flex-col items-center gap-2"
+                      className={`h-auto py-5 px-4 flex flex-col items-center gap-3 rounded-2xl transition-all duration-300 hover-lift hover-bounce ${
+                        selectedFilter === filter.id
+                          ? 'bg-gradient-to-br from-pink-500 to-purple-500 text-white border-4 border-pink-400 shadow-playful-lg scale-105'
+                          : 'bg-white border-2 border-purple-200 hover:border-purple-400 hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50'
+                      }`}
                       onClick={() => setSelectedFilter(filter.id)}
                     >
-                      <span className="text-3xl">{filter.emoji}</span>
-                      <span className="text-sm font-medium text-center leading-tight">
+                      <span className={`text-4xl ${selectedFilter === filter.id ? 'animate-bounce-gentle' : ''}`}>
+                        {filter.emoji}
+                      </span>
+                      <span className={`text-sm font-bold text-center leading-tight ${
+                        selectedFilter === filter.id ? 'text-white' : 'text-foreground'
+                      }`}>
                         {filter.name}
                       </span>
                     </Button>
@@ -295,20 +324,26 @@ export default function PostcardPoodle() {
 
             {/* Message Input */}
             {image && (
-              <Card className="p-6">
-                <Label htmlFor="message" className="text-lg font-bold text-foreground mb-3 block">
-                  Your Message
+              <Card className="p-6 bg-white/90 backdrop-blur-sm border-4 border-orange-300 rounded-3xl shadow-playful hover-lift">
+                <Label htmlFor="message" className="text-2xl font-extrabold text-foreground mb-4 flex items-center gap-2 block">
+                  <Heart className="w-6 h-6 text-pink-500 animate-pulse" />
+                  <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                    Your Message
+                  </span>
                 </Label>
                 <Input
                   id="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Write something fun!"
-                  className="text-lg"
+                  placeholder="Write something fun! 🎉"
+                  className="text-lg border-2 border-pink-300 rounded-xl focus:border-pink-500 focus:ring-4 focus:ring-pink-200 transition-all"
                   maxLength={60}
                 />
-                <p className="text-xs text-muted-foreground mt-2">
-                  {message.length}/60 characters
+                <p className="text-sm font-semibold text-muted-foreground mt-3 flex items-center gap-2">
+                  <span className="text-pink-500">{message.length}</span>
+                  <span>/</span>
+                  <span className="text-purple-500">60</span>
+                  <span className="ml-2">characters ✍️</span>
                 </p>
               </Card>
             )}
@@ -316,40 +351,54 @@ export default function PostcardPoodle() {
 
           {/* Right Column - Preview & Download */}
           <div className="space-y-6">
-            <Card className="p-6">
-              <h2 className="text-2xl font-bold text-foreground mb-4">
-                Preview
+            <Card className="p-6 bg-white/90 backdrop-blur-sm border-4 border-blue-300 rounded-3xl shadow-playful hover-lift">
+              <h2 className="text-3xl font-extrabold text-foreground mb-5 flex items-center gap-3">
+                <span className="text-3xl animate-wiggle">👀</span>
+                <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  Preview
+                </span>
               </h2>
               
               {!image ? (
-                <div className="aspect-[3/2] rounded-lg bg-muted flex items-center justify-center border-2 border-dashed border-border">
-                  <div className="text-center space-y-2">
-                    <div className="text-6xl">🎨</div>
-                    <p className="text-muted-foreground">
-                      Your postcard will appear here
+                <div className="aspect-[3/2] rounded-2xl bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center border-4 border-dashed border-blue-300">
+                  <div className="text-center space-y-3">
+                    <div className="text-7xl animate-bounce-gentle">🎨</div>
+                    <p className="text-foreground font-bold text-lg">
+                      Your postcard will appear here! 🎴
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Upload an image to get started ✨
                     </p>
                   </div>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {/* Canvas for filtered image (hidden) */}
                   <canvas ref={canvasRef} className="hidden" />
                   
                   {/* Postcard Preview */}
-                  <div className="bg-card border-4 border-border rounded-xl p-4 shadow-xl">
-                    <div className="border-2 border-muted rounded-lg overflow-hidden">
-                      <div className="relative aspect-[3/2]">
-                        {canvasRef.current && (
+                  <div className="bg-gradient-to-br from-pink-50 to-purple-50 border-4 border-pink-400 rounded-3xl p-5 shadow-playful-lg hover-lift">
+                    <div className="border-4 border-purple-300 rounded-2xl overflow-hidden bg-white">
+                      <div className="relative aspect-[3/2] bg-gradient-to-br from-blue-100 to-purple-100">
+                        {selectedFilter !== 'none' && canvasRef.current ? (
                           <img
-                            src={canvasRef.current.toDataURL() || "/placeholder.svg"}
+                            src={canvasRef.current.toDataURL() || image}
                             alt="Filtered preview"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={image}
+                            alt="Preview"
                             className="w-full h-full object-cover"
                           />
                         )}
                       </div>
-                      <div className="bg-muted p-4 text-center">
-                        <p className="font-bold text-lg text-foreground">
+                      <div className="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 p-5 text-center border-t-4 border-purple-300">
+                        <p className="font-extrabold text-xl text-foreground flex items-center justify-center gap-2">
+                          <span className="text-2xl">💌</span>
                           {message}
+                          <span className="text-2xl">🐾</span>
                         </p>
                       </div>
                     </div>
@@ -359,10 +408,10 @@ export default function PostcardPoodle() {
                   <Button
                     onClick={downloadPostcard}
                     size="lg"
-                    className="w-full text-lg font-bold"
+                    className="w-full text-xl font-extrabold py-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white border-4 border-pink-400 shadow-playful-lg hover-lift hover-bounce transition-all duration-300"
                   >
-                    <Download className="w-5 h-5 mr-2" />
-                    Download My Postcard
+                    <Download className="w-6 h-6 mr-2 animate-bounce-gentle" />
+                    Download My Postcard! 🎉
                   </Button>
                 </div>
               )}
@@ -370,13 +419,19 @@ export default function PostcardPoodle() {
 
             {/* Fun Stats */}
             {image && (
-              <Card className="p-6 bg-accent/50">
-                <div className="text-center space-y-2">
-                  <p className="text-sm font-medium text-accent-foreground">
-                    ✨ Ready to share your masterpiece!
+              <Card className="p-6 bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 border-4 border-yellow-400 rounded-3xl shadow-playful">
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2 text-3xl mb-2">
+                    <PartyPopper className="w-6 h-6 text-pink-500 animate-wiggle" />
+                    <span className="animate-bounce-gentle">🎊</span>
+                    <span className="animate-bounce-gentle" style={{ animationDelay: '0.2s' }}>🎉</span>
+                    <PartyPopper className="w-6 h-6 text-purple-500 animate-wiggle" style={{ animationDelay: '0.1s' }} />
+                  </div>
+                  <p className="text-lg font-extrabold text-foreground">
+                    ✨ Ready to share your masterpiece! ✨
                   </p>
-                  <p className="text-xs text-muted-foreground">
-                    Perfect for social media, email, or printing
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    Perfect for social media 📱, email 📧, or printing 🖨️
                   </p>
                 </div>
               </Card>
