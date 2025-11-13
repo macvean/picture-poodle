@@ -339,10 +339,16 @@ export default function PostcardPoodle() {
                   <div className="bg-card border-4 border-border rounded-xl p-4 shadow-xl">
                     <div className="border-2 border-muted rounded-lg overflow-hidden">
                       <div className="relative aspect-[3/2]">
-                        {canvasRef.current && (
+                        {selectedFilter !== 'none' && canvasRef.current ? (
                           <img
-                            src={canvasRef.current.toDataURL() || "/placeholder.svg"}
+                            src={canvasRef.current.toDataURL() || image}
                             alt="Filtered preview"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={image}
+                            alt="Preview"
                             className="w-full h-full object-cover"
                           />
                         )}
