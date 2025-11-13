@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Upload, Download, Sparkles } from 'lucide-react';
+import { Upload, Download, Sparkles, Wand2, Loader2 } from 'lucide-react';
 
 type FilterType = 'none' | 'mustache' | 'neon' | 'pixel' | 'flare';
 
@@ -22,6 +22,8 @@ export default function PostcardPoodle() {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>('none');
   const [message, setMessage] = useState('Wish you were here! 🐾');
   const [isDragging, setIsDragging] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generateError, setGenerateError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -49,6 +51,36 @@ export default function PostcardPoodle() {
 
   const handleDragLeave = () => {
     setIsDragging(false);
+  };
+
+  const handleGenerateMessage = async () => {
+    setIsGenerating(true);
+    setGenerateError(null);
+    
+    try {
+      const response = await fetch('/api/generate-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          filterType: selectedFilter,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to generate message');
+      }
+
+      const data = await response.json();
+      setMessage(data.message);
+    } catch (error) {
+      console.error('Error generating message:', error);
+      setGenerateError(error instanceof Error ? error.message : 'Failed to generate message');
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const applyFilter = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
@@ -296,9 +328,30 @@ export default function PostcardPoodle() {
             {/* Message Input */}
             {image && (
               <Card className="p-6">
-                <Label htmlFor="message" className="text-lg font-bold text-foreground mb-3 block">
-                  Your Message
-                </Label>
+                <div className="flex items-center justify-between mb-3">
+                  <Label htmlFor="message" className="text-lg font-bold text-foreground block">
+                    Your Message
+                  </Label>
+                  <Button
+                    onClick={handleGenerateMessage}
+                    disabled={isGenerating}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    {isGenerating ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="w-4 h-4" />
+                        Generate with AI
+                      </>
+                    )}
+                  </Button>
+                </div>
                 <Input
                   id="message"
                   value={message}
@@ -307,9 +360,16 @@ export default function PostcardPoodle() {
                   className="text-lg"
                   maxLength={60}
                 />
-                <p className="text-xs text-muted-foreground mt-2">
-                  {message.length}/60 characters
-                </p>
+                <div className="flex items-center justify-between mt-2">
+                  <p className="text-xs text-muted-foreground">
+                    {message.length}/60 characters
+                  </p>
+                  {generateError && (
+                    <p className="text-xs text-destructive">
+                      {generateError}
+                    </p>
+                  )}
+                </div>
               </Card>
             )}
           </div>
