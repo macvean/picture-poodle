@@ -41,6 +41,25 @@ node --version
    ```
    This flag tells npm to use the legacy peer dependency resolution algorithm, which is more permissive.
 
+3. **Set up OpenAI API Key** (for AI message generation):
+   
+   Create a `.env.local` file in the `picture-poodle` directory:
+   ```bash
+   touch .env.local
+   ```
+   
+   Add your OpenAI API key to the file:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+   
+   **Important Security Notes:**
+   - Never commit your `.env.local` file to git (it's already in `.gitignore`)
+   - Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+   - The API key is only used server-side and never exposed to the client
+   
+   **Note:** The AI message generation feature is optional. The app will work without it, but the "Generate with AI" button will show an error if the API key is not configured.
+
 ## Launching the App
 
 ### Development Mode
@@ -89,7 +108,9 @@ The production server will also run on [http://localhost:3000](http://localhost:
    - Neon Dog 🌈
    - Pixel Vomit 🎮
    - 1990s Lens Flare ✨
-3. **Add a Message**: Customize the postcard message (up to 60 characters)
+3. **Add a Message**: 
+   - Type your own message (up to 60 characters), or
+   - Click "Generate with AI" to create a playful message using OpenAI GPT (context-aware based on your selected filter!)
 4. **Download**: Click the "Download My Postcard" button to save your creation
 
 ## Available Scripts
@@ -107,6 +128,7 @@ The production server will also run on [http://localhost:3000](http://localhost:
 - **Tailwind CSS** - Styling
 - **Radix UI** - Accessible component primitives
 - **Lucide React** - Icons
+- **OpenAI GPT** - AI-powered message generation
 
 ## Learn More
 
